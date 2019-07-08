@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7.26
+    hostname: mysql
+    volumes:
+      - ./host_volume/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    networks: 
+      - mynet123
+  nodeapp:
+    image: vivekbhandari/nodeapp
+    hostname: nodeapp
+    depends_on: 
+      - mysql
+    ports:
+      - "3000:3000"
+    restart: on-failure
+    networks: 
+      - mynet123
+networks:
+    mynet123:
+        driver: bridge
+      
