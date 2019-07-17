@@ -10,9 +10,18 @@ services:
       MYSQL_DATABASE: test
     networks: 
       - mynet123
+  redis:
+    image: redis:latest
+    hostname: redis
+    volumes:
+      - ./host_volume/redis:/data
+    networks:
+      - mynet123
   nodeapp:
     image: vivekbhandari/nodeapp
     hostname: nodeapp
+    volumes:
+      - ./:/opt/nodeapp
     depends_on: 
       - mysql
     ports:

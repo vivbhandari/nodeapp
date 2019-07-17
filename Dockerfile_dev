@@ -1,10 +1,8 @@
 FROM alpine:3.9.4
 
-RUN mkdir -p /opt/nodeappprod
+RUN mkdir -p /opt/nodeapp
 
-WORKDIR /opt/nodeappprod
-
-COPY index.js .
+WORKDIR /opt/nodeapp
 
 RUN apk add nodejs
 RUN apk add --update nodejs npm
