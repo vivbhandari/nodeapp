@@ -17,5 +17,6 @@ RUN npm i redis
 RUN npm i -g nodemon
 
 EXPOSE 3000
+EXPOSE 8080
 
 CMD [ "/bin/sh", "-c", "sleep 3 && nodemon" ]

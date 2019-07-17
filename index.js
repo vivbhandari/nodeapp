@@ -3,6 +3,7 @@ const app = express();
 const Joi = require('joi');
 const mysql = require('mysql');
 const redis =  require('redis');
+const WebSocket = require('ws');
 
 app.use(express.json());
 
@@ -23,6 +24,16 @@ const redisClient = redis.createClient(6379, 'redis');
 
 redisClient.on('error', (err) =>{
     console.log('Error:', err);
+});
+
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on('connection', ws => {
+  ws.on('message', message => {
+    console.log(`Received message => ${message}`)
+    ws.send('got it');
+  })
+  ws.send('Hello! Message From Server!!')
 });
 
 app.get('/', (req, res) => {
